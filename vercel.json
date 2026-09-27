@@ -4,7 +4,13 @@
     { "source": "/server-infrastruttura", "destination": "/index.html" },
     { "source": "/noleggio-it", "destination": "/index.html" },
     { "source": "/rete-wifi-aziendale", "destination": "/index.html" },
-    { "source": "/assessment-it-monza", "destination": "/assessment-it-monza.html" }
+    { "source": "/assessment-it-monza", "destination": "/assessment-it-monza.html" },
+
+    { "source": "/firewall-aziende-monza", "destination": "/service.html" },
+    { "source": "/assistenza-it-pmi", "destination": "/service.html" },
+    { "source": "/server-aziende-monza", "destination": "/service.html" },
+    { "source": "/noleggio-it-aziende", "destination": "/service.html" },
+    { "source": "/rete-wifi-aziende-monza", "destination": "/service.html" }
   ],
   "headers": [
     {
