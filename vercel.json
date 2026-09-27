@@ -3,12 +3,14 @@
     { "source": "/assessment-it", "destination": "/index.html" },
     { "source": "/server-infrastruttura", "destination": "/index.html" },
     { "source": "/noleggio-it", "destination": "/index.html" },
-    { "source": "/rete-wifi-aziendale", "destination": "/index.html" }
+    { "source": "/rete-wifi-aziendale", "destination": "/index.html" },
+    { "source": "/assessment-it-monza", "destination": "/assessment-it-monza.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
