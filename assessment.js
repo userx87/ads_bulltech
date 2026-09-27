@@ -1,6 +1,5 @@
 (function(){
   const GTM_ID='GTM-MX6XC96N';
-  const WHATSAPP_URL='';
   const consentKey='bulltech_ads_consent_v1';
   const attributionKey='bulltech_ads_attribution_v1';
   const params=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'];
@@ -36,8 +35,7 @@
       ad_personalization:granted?'granted':'denied'
     });
     if(granted) loadGTM();
-    const banner=document.getElementById('cookie-banner');
-    if(banner) banner.hidden=true;
+    document.getElementById('cookie-banner')?.setAttribute('hidden','');
   }
 
   function initConsent(){
@@ -45,11 +43,11 @@
     const saved=localStorage.getItem(consentKey);
     if(saved==='granted') setConsent('granted');
     else if(saved==='denied') setConsent('denied');
-    else if(banner) banner.hidden=false;
+    else if(banner) banner.removeAttribute('hidden');
 
     document.getElementById('cookie-accept')?.addEventListener('click',()=>setConsent('granted'));
     document.getElementById('cookie-reject')?.addEventListener('click',()=>setConsent('denied'));
-    document.getElementById('cookie-settings')?.addEventListener('click',()=>{if(banner) banner.hidden=false});
+    document.getElementById('cookie-settings')?.addEventListener('click',()=>banner?.removeAttribute('hidden'));
   }
 
   function pushEvent(name,extra){
@@ -63,27 +61,25 @@
 
   function initTracking(){
     document.querySelectorAll('.track-phone').forEach(el=>{
-      el.addEventListener('click',()=>pushEvent('phone_click',{phone:'+390395787212'}));
+      el.addEventListener('click',()=>pushEvent('phone_click',{phone:'+390395787212',placement:el.classList.contains('track-sticky')?'sticky':'page'}));
     });
+
+    document.querySelectorAll('.track-email').forEach(el=>{
+      el.addEventListener('click',()=>pushEvent('email_click',{email:'info@bulltech.it',placement:el.classList.contains('track-sticky')?'sticky':'page'}));
+    });
+
     document.querySelectorAll('.track-cta').forEach(el=>{
       el.addEventListener('click',()=>pushEvent('cta_click',{cta:el.textContent.trim()}));
     });
-    document.querySelectorAll('.track-email').forEach(el=>{
-      el.addEventListener('click',()=>pushEvent('email_click',{email:'info@bulltech.it'}));
-    });
-  }
 
-  function initWhatsApp(){
-    if(!WHATSAPP_URL) return;
-    document.querySelectorAll('.track-whatsapp').forEach(el=>{
-      el.href=WHATSAPP_URL;
-      el.hidden=false;
-      el.addEventListener('click',()=>pushEvent('whatsapp_click'));
+    document.querySelectorAll('.faq-list details').forEach((el,index)=>{
+      el.addEventListener('toggle',()=>{
+        if(el.open) pushEvent('faq_open',{faq_index:index+1,question:el.querySelector('summary')?.textContent.trim()||''});
+      });
     });
   }
 
   readAttribution();
   initConsent();
   initTracking();
-  initWhatsApp();
 })();
