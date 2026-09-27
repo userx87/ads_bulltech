@@ -1,5 +1,7 @@
 (function(){
   const GTM_ID='GTM-MX6XC96N';
+  const OPENAI_PIXEL_ID='81rwBC2brbap1uYMRAQYtN';
+  const OPENAI_PIXEL_SRC='https://bzrcdn.openai.com/sdk/oaiq.min.js';
   const consentKey='bulltech_ads_consent_v1';
   const attributionKey='bulltech_ads_attribution_v1';
   const params=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'];
@@ -25,6 +27,29 @@
     document.head.appendChild(s);
   }
 
+  function loadOpenAIPixel(){
+    if(!OPENAI_PIXEL_ID || window.__bulltechOpenAIPixelInitialized) return;
+
+    if(!window.oaiq){
+      const q=function(){q.q.push(arguments)};
+      q.q=[];
+      window.oaiq=q;
+    }
+
+    if(!document.getElementById('openai-pixel-loader')){
+      const j=document.createElement('script');
+      j.id='openai-pixel-loader';
+      j.async=true;
+      j.src=OPENAI_PIXEL_SRC;
+      const firstScript=document.getElementsByTagName('script')[0];
+      if(firstScript?.parentNode) firstScript.parentNode.insertBefore(j,firstScript);
+      else document.head.appendChild(j);
+    }
+
+    window.oaiq('init',{pixelId:OPENAI_PIXEL_ID,debug:true});
+    window.__bulltechOpenAIPixelInitialized=true;
+  }
+
   function setConsent(value){
     localStorage.setItem(consentKey,value);
     const granted=value==='granted';
@@ -34,7 +59,10 @@
       ad_user_data:granted?'granted':'denied',
       ad_personalization:granted?'granted':'denied'
     });
-    if(granted) loadGTM();
+    if(granted){
+      loadGTM();
+      loadOpenAIPixel();
+    }
     document.getElementById('cookie-banner')?.setAttribute('hidden','');
   }
 
