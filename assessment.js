@@ -64,6 +64,8 @@
     if(granted){
       loadGTM();
       openaiPageView();
+      const variant=(window.bulltechLandingContext||{}).variant||'control';
+      openaiCustom('landing_'+variant);
     }
 
     document.getElementById('cookie-banner')?.setAttribute('hidden','');
@@ -105,7 +107,8 @@
           cta_text:el.textContent.trim(),
           cta_section:el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page'
         });
-        openaiCustom('phone_click_'+placement);
+        const section=el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page';
+        openaiCustom('phone_click_'+section);
       });
     });
 
@@ -118,7 +121,8 @@
           cta_text:el.textContent.trim(),
           cta_section:el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page'
         });
-        openaiCustom('email_click_'+placement);
+        const section=el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page';
+        openaiCustom('email_click_'+section);
       });
     });
 
@@ -152,6 +156,20 @@
       });
     },{passive:true});
 
+
+    const engagementTimers=[
+      [15,'engaged_15s'],
+      [30,'engaged_30s'],
+      [60,'engaged_60s']
+    ];
+    engagementTimers.forEach(([seconds,eventName])=>{
+      window.setTimeout(()=>{
+        if(document.visibilityState!=='visible') return;
+        pushEvent(eventName,{seconds});
+        openaiCustom(eventName);
+      },seconds*1000);
+    });
+
     const contact=document.getElementById('contatti');
     if(contact && 'IntersectionObserver' in window){
       const io=new IntersectionObserver(entries=>{
@@ -169,5 +187,4 @@
   initConsent();
   initTracking();
   pushEvent('landing_loaded',{});
-  if(openaiConsentGranted) openaiCustom('landing_'+((window.bulltechLandingContext||{}).variant||'control'));
 })();
