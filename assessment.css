@@ -334,3 +334,109 @@ p{color:var(--muted)}
   .cookie{grid-template-columns:1fr;left:10px;right:10px;bottom:74px}
   .cookie-actions{display:grid;grid-template-columns:1fr 1fr}
 }
+
+/* A/B LANDING SYSTEM
+   A = direct response (existing clean conversion layout)
+   B = authority / consulting, same BullTech brand */
+.variant-b{
+  --blue:#1693D8;
+  --dark:#252B30;
+  --ink:#252B30;
+  --muted:#52616A;
+  --soft:#F1F5F7;
+}
+.variant-b .site-head{
+  background:rgba(37,43,48,.98);
+  border-bottom-color:rgba(255,255,255,.12);
+}
+.variant-b .site-head .head-phone{color:#fff}
+.variant-b .site-head .btn.small{
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.45);
+}
+.variant-b .hero{
+  background:
+    radial-gradient(circle at 80% 15%,rgba(22,147,216,.24),transparent 34%),
+    linear-gradient(145deg,#252B30 0%,#303840 64%,#203846 100%);
+  border-bottom:0;
+  padding:82px 0 76px;
+}
+.variant-b .hero h1{color:#fff;font-size:clamp(46px,5.8vw,76px)}
+.variant-b .hero .hero-lead{color:#DCE8ED;max-width:820px}
+.variant-b .hero .kicker{color:#79C9F2}
+.variant-b .hero .micro-trust{
+  color:#E5EEF2;
+  border-top-color:rgba(255,255,255,.17);
+}
+.variant-b .hero .micro-trust span:before{color:#79C9F2}
+.variant-b .hero .btn{
+  background:#fff;
+  color:#252B30;
+  border-color:#fff;
+}
+.variant-b .hero .btn.secondary{
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.5);
+}
+.variant-b .contact-panel{
+  background:#fff;
+  border:0;
+  border-radius:12px;
+  padding:28px;
+  box-shadow:0 24px 60px rgba(0,0,0,.18);
+}
+.variant-b .contact-panel h2{color:#252B30}
+.variant-b .contact-panel-note{padding-bottom:0}
+.variant-b .why{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.variant-b .why-grid{
+  align-items:start;
+}
+.variant-b .facts{
+  border-top:4px solid var(--blue);
+  background:var(--soft);
+  padding:8px 24px;
+  border-radius:8px;
+}
+.variant-b .questions{
+  background:#fff;
+  color:var(--ink);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.variant-b .questions h2{color:var(--dark)}
+.variant-b .question-list{border-top-color:var(--line)}
+.variant-b .question-list>div{border-bottom-color:var(--line)}
+.variant-b .question-list span{color:var(--blue)}
+.variant-b .question-list p{color:#45535B}
+.variant-b .section.soft{
+  background:#F4F7F8;
+}
+.variant-b .scope{
+  background:#fff;
+}
+.variant-b .process{
+  background:#F7F9FA;
+}
+.variant-b .final-cta{
+  background:#252B30;
+}
+.variant-b .final-cta .btn.white-btn{
+  background:#1693D8;
+  border-color:#1693D8;
+  color:#fff;
+}
+.variant-b .final-cta .btn.outline-light{
+  border-color:rgba(255,255,255,.62);
+}
+.variant-b .kicker{letter-spacing:.13em}
+
+@media(max-width:680px){
+  .variant-b .hero{padding:48px 0}
+  .variant-b .contact-panel{padding:22px}
+  .variant-b .site-head{background:#252B30}
+}
