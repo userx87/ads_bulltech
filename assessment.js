@@ -83,9 +83,13 @@
   }
 
   function pushEvent(name,extra){
+    const ctx=window.bulltechLandingContext||{};
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({
       event:name,
+      service:ctx.service||null,
+      landing_variant:ctx.variant||"control",
+      landing_path:ctx.landingPath||location.pathname,
       ...(window.bulltechAdsAttribution||{}),
       ...(extra||{})
     });
@@ -95,7 +99,12 @@
     document.querySelectorAll('.track-phone').forEach(el=>{
       el.addEventListener('click',()=>{
         const placement=el.classList.contains('track-sticky')?'sticky':'page';
-        pushEvent('phone_click',{phone:'+390395787212',placement});
+        pushEvent('phone_click',{
+          phone:'+390395787212',
+          placement,
+          cta_text:el.textContent.trim(),
+          cta_section:el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page'
+        });
         openaiCustom('phone_click_'+placement);
       });
     });
@@ -103,7 +112,12 @@
     document.querySelectorAll('.track-email').forEach(el=>{
       el.addEventListener('click',()=>{
         const placement=el.classList.contains('track-sticky')?'sticky':'page';
-        pushEvent('email_click',{email:'info@bulltech.it',placement});
+        pushEvent('email_click',{
+          email:'info@bulltech.it',
+          placement,
+          cta_text:el.textContent.trim(),
+          cta_section:el.closest('header')?'header':el.closest('.hero')?'hero':el.closest('.final-cta')?'final':el.closest('.inline-cta')?'mid':el.closest('.mobile-contact-bar')?'sticky':'page'
+        });
         openaiCustom('email_click_'+placement);
       });
     });
@@ -154,4 +168,6 @@
   readAttribution();
   initConsent();
   initTracking();
+  pushEvent('landing_loaded',{});
+  if(openaiConsentGranted) openaiCustom('landing_'+((window.bulltechLandingContext||{}).variant||'control'));
 })();
