@@ -487,10 +487,40 @@
 
   const rawPath = location.pathname.replace(/\/$/, "");
   const variantMatch = rawPath.match(/-(a|b)$/);
-  const variant = variantMatch ? variantMatch[1] : "control";
   const basePath = variantMatch ? rawPath.replace(/-(a|b)$/, "") : rawPath;
   const base = pages[basePath];
   if (!base) return;
+
+  const query = new URLSearchParams(location.search);
+  const forcedVariant = query.get("lp_variant");
+  const isPaidChatGPT = query.get("utm_source") === "chatgpt" && query.get("utm_medium") === "paid";
+  let variant = variantMatch ? variantMatch[1] : null;
+  let assignmentSource = variant ? "route" : "control";
+
+  if (!variant && (forcedVariant === "a" || forcedVariant === "b")) {
+    variant = forcedVariant;
+    assignmentSource = "query";
+  }
+
+  if (!variant && isPaidChatGPT && variantOverrides[basePath]) {
+    const assignmentKey = "bulltech_lp_ab_v1:" + basePath;
+    try {
+      const saved = localStorage.getItem(assignmentKey);
+      if (saved === "a" || saved === "b") {
+        variant = saved;
+        assignmentSource = "paid_persisted";
+      } else {
+        variant = Math.random() < 0.5 ? "a" : "b";
+        localStorage.setItem(assignmentKey, variant);
+        assignmentSource = "paid_random";
+      }
+    } catch (e) {
+      variant = Math.random() < 0.5 ? "a" : "b";
+      assignmentSource = "paid_random_no_storage";
+    }
+  }
+
+  if (!variant) variant = "control";
 
   const c = {
     ...base,
@@ -501,6 +531,7 @@
     service: basePath.replace(/^\//, ""),
     basePath,
     variant,
+    assignmentSource,
     landingPath: rawPath
   };
 
