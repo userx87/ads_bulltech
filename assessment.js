@@ -91,6 +91,7 @@
       event:name,
       service:ctx.service||null,
       landing_variant:ctx.variant||"control",
+      ab_assignment_source:ctx.assignmentSource||"control",
       landing_path:ctx.landingPath||location.pathname,
       ...(window.bulltechAdsAttribution||{}),
       ...(extra||{})
@@ -187,4 +188,12 @@
   initConsent();
   initTracking();
   pushEvent('landing_loaded',{});
+  const ctx=window.bulltechLandingContext||{};
+  if(ctx.variant==="a" || ctx.variant==="b"){
+    pushEvent('experiment_assignment',{
+      experiment:"service_landing_ab_v1",
+      variant:ctx.variant,
+      assignment_source:ctx.assignmentSource||"unknown"
+    });
+  }
 })();
