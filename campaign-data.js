@@ -301,9 +301,212 @@
     }
   };
 
-  const path = location.pathname.replace(/\/$/, "");
-  const c = pages[path];
-  if (!c) return;
+
+  const variantOverrides = {
+    "/assistenza-it-pmi": {
+      a: {
+        title: "Assistenza IT per PMI: un referente per i problemi ricorrenti | BullTech",
+        description: "Assistenza IT per PMI in Lombardia: helpdesk, monitoraggio, patch e protezione endpoint con un referente unico e un perimetro chiaro.",
+        kicker: "Assistenza IT PMI · Problemi ricorrenti",
+        heroTitle: "Problemi IT che tornano? Serve un referente che li prenda in carico davvero.",
+        heroLead: "PC, posta, accessi e aggiornamenti non dovrebbero interrompere il lavoro ogni settimana. BullTech organizza l’assistenza quotidiana con helpdesk, monitoraggio e responsabilità chiare.",
+        ctaPhone: "Parla con un tecnico",
+        ctaEmail: "Richiedi una valutazione",
+        panelLabel: "Segnale da non ignorare",
+        panelTitle: "Se ogni richiesta IT ricomincia da zero, stai pagando il disordine.",
+        panelText: "Partiamo da utenti, postazioni e problemi ricorrenti. Ti diciamo cosa ha senso mettere sotto gestione continuativa.",
+        questionsKicker: "Dove si perde tempo",
+        questionsTitle: "Quattro segnali che l’IT quotidiano sta lavorando in emergenza.",
+        fitTitle: "Vuoi ridurre interruzioni e richieste sparse senza costruire un reparto IT interno.",
+        midStrong: "Quanto tempo perdi ogni mese sugli stessi problemi?",
+        midText: "Descrivici utenti, PC e criticità che si ripetono.",
+        midPhone: "Richiedi un confronto",
+        processTitle: "Inquadriamo il problema, definiamo il perimetro, poi partiamo.",
+        processIntro: "Niente pacchetti indistinti: prima capiamo cosa deve essere seguito ogni giorno e cosa resta progetto.",
+        finalTitle: "Vuoi smettere di gestire l’IT una emergenza alla volta?",
+        finalText: "Raccontaci come gestisci oggi utenti e postazioni. Ti aiutiamo a mettere ordine.",
+        finalEmail: "Richiedi una valutazione"
+      },
+      b: {
+        title: "Partner IT per PMI: helpdesk, monitoraggio e continuità | BullTech",
+        description: "BullTech affianca le PMI con un modello di assistenza IT continuativa: helpdesk, RMM, patch management e protezione endpoint.",
+        kicker: "Partner IT per PMI · BullTech",
+        heroTitle: "L’assistenza IT funziona quando qualcuno conosce il tuo ambiente prima del problema.",
+        heroLead: "BullTech costruisce un presidio continuativo per utenti e postazioni: helpdesk, monitoraggio, patch e protezione dentro un perimetro definito. Così il supporto diventa un processo, non una successione di urgenze.",
+        ctaPhone: "Parla con un consulente",
+        ctaEmail: "Valuta il modello BullTech",
+        panelLabel: "Metodo BullTech",
+        panelTitle: "Un referente, un perimetro, responsabilità leggibili.",
+        panelText: "Separiamo il supporto ordinario dai progetti e definiamo cosa viene monitorato, aggiornato e preso in carico.",
+        questionsKicker: "Governance quotidiana",
+        questionsTitle: "Le domande che distinguono un helpdesk da un vero presidio IT.",
+        fitTitle: "Cerchi un partner esterno che governi il quotidiano e sappia quando serve un progetto dedicato.",
+        midStrong: "Vuoi capire come strutturare il servizio?",
+        midText: "Partiamo dal tuo ambiente attuale e dal livello di presidio che ti serve.",
+        midPhone: "Parla con un consulente",
+        processTitle: "Un servizio efficace nasce da perimetro e responsabilità.",
+        processIntro: "Costruiamo il modello sulle postazioni, sugli utenti e sulle esigenze operative reali della tua azienda.",
+        finalTitle: "Cerchi un partner IT che conosca davvero il tuo ambiente?",
+        finalText: "Facciamo un primo confronto su utenti, postazioni e modalità di supporto.",
+        finalEmail: "Parla con BullTech"
+      }
+    },
+    "/firewall-aziende-monza": {
+      a: {
+        title: "Firewall e VPN aziendali: revisione e sicurezza | BullTech",
+        description: "Firewall e VPN aziendali in Lombardia: revisione di configurazione, accessi remoti, amministrazione e ciclo di vita con BullTech.",
+        kicker: "Firewall e VPN · Revisione operativa",
+        heroTitle: "Il firewall è acceso. Ma sei sicuro che protegga ancora la rete che hai oggi?",
+        heroLead: "Sedi, VPN, utenti e servizi cambiano. Le regole spesso restano. BullTech verifica la configurazione reale prima che eccezioni e accessi accumulati diventino un rischio operativo.",
+        ctaPhone: "Fai il punto sul firewall",
+        ctaEmail: "Richiedi una verifica",
+        panelLabel: "Il rischio invisibile",
+        panelTitle: "Il problema non è avere un firewall vecchio. È non sapere più perché è configurato così.",
+        panelText: "Ricostruiamo accessi, collegamenti, amministrazione e dipendenze prima di proporre modifiche o sostituzioni.",
+        questionsKicker: "Controlli essenziali",
+        questionsTitle: "Quattro domande che dovresti poter rispondere senza cercare vecchie email.",
+        fitTitle: "Hai dubbi su VPN, accessi o regole e vuoi una revisione prima di aggiungere altre eccezioni.",
+        midStrong: "Sai esattamente chi entra da remoto nella tua rete?",
+        midText: "Descrivici firewall, sedi e accessi attuali.",
+        midPhone: "Richiedi un confronto",
+        finalTitle: "Vuoi sapere se il firewall è ancora coerente con la tua azienda?",
+        finalText: "Partiamo dalla configurazione reale e da ciò che è cambiato nel tempo.",
+        finalEmail: "Richiedi una verifica"
+      },
+      b: {
+        title: "Firewall aziendale gestito: governance di VPN e accessi | BullTech",
+        description: "BullTech governa firewall, VPN e accessi aziendali con un approccio consulenziale: configurazione, ciclo di vita e dipendenze di rete.",
+        kicker: "Firewall aziendale · Governance",
+        heroTitle: "Firewall, VPN e accessi: una configurazione governata vale più di un appliance nuovo.",
+        heroLead: "La sicurezza perimetrale non è una scatola da installare e dimenticare. BullTech parte dalla rete, dagli accessi e dalle dipendenze operative per mantenere la configurazione coerente nel tempo.",
+        ctaPhone: "Parla con un consulente",
+        ctaEmail: "Valuta la configurazione",
+        panelLabel: "Metodo prima del prodotto",
+        panelTitle: "Prima si ricostruisce il contesto. Poi si decide cosa cambiare.",
+        panelText: "Analizziamo apparato, accessi remoti, account amministrativi e rete collegata senza dare per scontata la sostituzione.",
+        questionsKicker: "Governance della sicurezza",
+        questionsTitle: "Le domande che rendono leggibile una configurazione critica.",
+        fitTitle: "Vuoi trasformare il firewall da apparato isolato a componente governato dell’infrastruttura.",
+        midStrong: "La tua configurazione è documentata e comprensibile?",
+        midText: "Possiamo partire da apparato, rete e accessi esistenti.",
+        midPhone: "Parla con BullTech",
+        finalTitle: "Vuoi governare firewall e accessi con più chiarezza?",
+        finalText: "Facciamo un primo confronto sulla rete attuale e sulle dipendenze reali.",
+        finalEmail: "Parla con BullTech"
+      }
+    },
+    "/server-aziende-monza": {
+      a: {
+        title: "Server aziendale da sostituire? Dimensionamento e migrazione | BullTech",
+        description: "Server aziendali in Lombardia: dimensionamento su workload reali, storage, backup, virtualizzazione e migrazione con BullTech.",
+        kicker: "Server aziendale · Rinnovo e migrazione",
+        heroTitle: "Server lento, pieno o a fine vita? Non comprare il prossimo prima di misurare cosa serve.",
+        heroLead: "Un server sovradimensionato costa. Uno sottodimensionato costa di più. BullTech parte da workload, VM, storage, backup e crescita prima di costruire la configurazione.",
+        ctaPhone: "Parla del tuo server",
+        ctaEmail: "Richiedi una valutazione",
+        panelLabel: "Prima di quotare",
+        panelTitle: "Il preventivo giusto nasce dai carichi, non da una configurazione standard.",
+        panelText: "Ricostruiamo applicazioni, risorse, storage e dipendenze. Poi dimensioniamo hardware e migrazione.",
+        questionsKicker: "Prima dell’acquisto",
+        questionsTitle: "Quattro informazioni che cambiano completamente il progetto server.",
+        fitTitle: "Devi rinnovare l’infrastruttura e vuoi evitare acquisti a sensazione o migrazioni improvvisate.",
+        midStrong: "Hai già una configurazione da confrontare?",
+        midText: "Mandaci scenario, workload e vincoli: partiamo dai numeri reali.",
+        midPhone: "Richiedi un confronto",
+        finalTitle: "Devi decidere cosa sostituire e quanto dimensionare?",
+        finalText: "Partiamo da workload, storage, backup e crescita prevista.",
+        finalEmail: "Richiedi una valutazione"
+      },
+      b: {
+        title: "Infrastruttura server per aziende: progetto e continuità | BullTech",
+        description: "Progettazione infrastruttura server BullTech: workload, virtualizzazione, storage, backup e migrazione governati come un unico sistema.",
+        kicker: "Server e infrastruttura · Progettazione",
+        heroTitle: "Un’infrastruttura server si dimensiona sui workload, non sul catalogo.",
+        heroLead: "Compute, storage, backup e migrazione sono parti dello stesso progetto. BullTech costruisce la soluzione partendo dalle dipendenze operative e dalla crescita prevista, non da una distinta hardware preconfezionata.",
+        ctaPhone: "Parla con un consulente",
+        ctaEmail: "Imposta il progetto",
+        panelLabel: "Approccio progettuale",
+        panelTitle: "Prima ricostruiamo il sistema. Poi scegliamo la tecnologia.",
+        panelText: "Applicazioni, VM, storage, backup e continuità vengono letti insieme per ridurre sorprese durante il passaggio.",
+        questionsKicker: "Progettare prima di acquistare",
+        questionsTitle: "Le informazioni che trasformano un preventivo hardware in un progetto infrastrutturale.",
+        fitTitle: "Cerchi un partner che governi dimensionamento, fornitura e migrazione come un unico progetto.",
+        midStrong: "Vuoi una configurazione difendibile tecnicamente?",
+        midText: "Facciamo partire la scelta hardware dai carichi e dalle dipendenze.",
+        midPhone: "Parla con BullTech",
+        finalTitle: "Vuoi progettare il prossimo ambiente server con più controllo?",
+        finalText: "Confrontiamoci su workload, crescita, backup e percorso di migrazione.",
+        finalEmail: "Imposta il progetto"
+      }
+    },
+    "/rete-wifi-aziende-monza": {
+      a: {
+        title: "Wi-Fi aziendale instabile? Progettazione rete e copertura | BullTech",
+        description: "Rete e Wi-Fi aziendale in Lombardia: copertura, access point, switching, PoE, segmentazione e cablaggio progettati da BullTech.",
+        kicker: "Rete e Wi-Fi · Problemi di copertura",
+        heroTitle: "Wi-Fi instabile? Aggiungere un altro access point può essere il modo più costoso di non risolvere.",
+        heroLead: "Copertura, interferenze, cablaggio, switching e posizione degli apparati lavorano insieme. BullTech parte dagli spazi e dall’uso reale prima di aggiungere hardware.",
+        ctaPhone: "Parla della tua rete",
+        ctaEmail: "Richiedi una valutazione",
+        panelLabel: "Prima di comprare AP",
+        panelTitle: "Se non conosci il problema, stai solo spostando il problema.",
+        panelText: "Guardiamo sede, punti rete, dispositivi e zone critiche per capire cosa serve davvero.",
+        questionsKicker: "Segnali concreti",
+        questionsTitle: "Quattro situazioni in cui la rete va progettata, non rattoppata.",
+        fitTitle: "Hai zone instabili, una sede nuova o una rete cresciuta a pezzi e vuoi sistemarla con metodo.",
+        midStrong: "Sai già dove il Wi-Fi non regge?",
+        midText: "Planimetria, piani e zone problematiche sono un ottimo punto di partenza.",
+        midPhone: "Richiedi un confronto",
+        finalTitle: "Vuoi smettere di correggere la rete per tentativi?",
+        finalText: "Raccontaci sede, utenti e zone critiche. Partiamo dagli spazi reali.",
+        finalEmail: "Richiedi una valutazione"
+      },
+      b: {
+        title: "Rete e Wi-Fi aziendale progettati per la sede | BullTech",
+        description: "BullTech progetta reti LAN e Wi-Fi aziendali: copertura, switching, VLAN, PoE, cablaggio, installazione e collaudo.",
+        kicker: "Rete aziendale · Progettazione",
+        heroTitle: "Una rete aziendale ben progettata si nota perché smette di essere un problema.",
+        heroLead: "BullTech mette insieme copertura Wi-Fi, switching, PoE, segmentazione e cablaggio in un progetto coerente con spazi, utenti e dispositivi della sede.",
+        ctaPhone: "Parla con un consulente",
+        ctaEmail: "Imposta il progetto rete",
+        panelLabel: "Progetto prima degli apparati",
+        panelTitle: "Spazi, cablaggio e utilizzo definiscono la rete. Non il contrario.",
+        panelText: "Partiamo dalla sede e dal modo in cui viene usata per costruire una soluzione leggibile, installabile e collaudabile.",
+        questionsKicker: "Una rete governabile",
+        questionsTitle: "Le domande che trasformano una lista di access point in un progetto di rete.",
+        fitTitle: "Cerchi un partner che progetti rete cablata e Wi-Fi come un’unica infrastruttura.",
+        midStrong: "Stai aprendo o ampliando una sede?",
+        midText: "Partiamo da planimetria, utenti, dispositivi e servizi che devono funzionare.",
+        midPhone: "Parla con BullTech",
+        finalTitle: "Vuoi una rete progettata per la sede che hai davvero?",
+        finalText: "Facciamo un primo confronto su spazi, copertura, switching e cablaggio.",
+        finalEmail: "Imposta il progetto"
+      }
+    }
+  };
+
+  const rawPath = location.pathname.replace(/\/$/, "");
+  const variantMatch = rawPath.match(/-(a|b)$/);
+  const variant = variantMatch ? variantMatch[1] : "control";
+  const basePath = variantMatch ? rawPath.replace(/-(a|b)$/, "") : rawPath;
+  const base = pages[basePath];
+  if (!base) return;
+
+  const c = {
+    ...base,
+    ...((variantOverrides[basePath] && variantOverrides[basePath][variant]) || {})
+  };
+
+  window.bulltechLandingContext = {
+    service: basePath.replace(/^\//, ""),
+    basePath,
+    variant,
+    landingPath: rawPath
+  };
+
+  document.body.classList.add("variant-" + variant);
+  document.body.dataset.lpVariant = variant;
+  document.body.dataset.service = window.bulltechLandingContext.service;
 
   document.title = c.title;
   document.querySelector('meta[name="description"]').setAttribute("content", c.description);
@@ -363,4 +566,10 @@
 
   document.getElementById("faq-list").innerHTML = c.faqs
     .map(x => '<details><summary>' + x[0] + '</summary><p>' + x[1] + '</p></details>').join("");
+  if (variant === "b") {
+    const hero = document.querySelector(".hero");
+    const why = document.querySelector(".why");
+    if (hero && why) hero.insertAdjacentElement("afterend", why);
+  }
+
 })();
