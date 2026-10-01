@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <link rel="stylesheet" href="/assessment.css">
   <!-- TRACKING HEAD: OpenAI Ads Measurement Pixel -->
-  <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("consent",false);oaiq("init",{pixelId:"81rwBC2brbap1uYMRAQYtN",debug:true});</script>
+  <!-- Measurement SDKs are loaded after consent by assessment.js. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -198,7 +198,9 @@
   </div>
 
   <!-- TRACKING FOOTER: campaign data, attribution and interaction events -->
+  <script src="/audience-core.js" defer></script>
   <script src="/campaign-data.js" defer></script>
   <script src="/assessment.js" defer></script>
+  <script src="/lead-form.js" defer></script>
 </body>
 </html>
