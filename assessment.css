@@ -444,3 +444,15 @@ p{color:var(--muted)}
   .variant-b .contact-panel{padding:22px}
   .variant-b .site-head{background:#fff}
 }
+/* The lead intake follows the existing BullTech palette and typography. */
+[hidden]{display:none!important}
+.lead-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,5vw,72px);align-items:start}
+.lead-form{display:grid;gap:20px;min-width:0}.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lead-form label{display:grid;gap:7px;font-weight:600;font-size:14px}
+.lead-form input,.lead-form select,.lead-form textarea{width:100%;min-width:0;padding:12px;border:1px solid #aabcc7;border-radius:8px;background:#fff;color:#323841;font:inherit}
+.lead-form :is(input,textarea,select):focus-visible{outline:3px solid #1693D8;outline-offset:2px}
+.lead-form textarea{resize:vertical}.lead-details summary{cursor:pointer;font-weight:600;padding:10px 0}.lead-details[open] .lead-grid{margin-top:12px}
+.lead-form .lead-privacy{display:flex;gap:10px;align-items:flex-start;font-size:13px;font-weight:400}.lead-privacy input{width:18px;height:18px;flex-shrink:0;margin-top:3px}
+.lead-form button{justify-self:start}.lead-form button:disabled{opacity:.65;cursor:wait}#lead-status{margin:0;min-height:1.6em}
+.lead-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+@media(max-width:760px){.lead-layout,.lead-grid{grid-template-columns:1fr}.lead-form input,.lead-form select,.lead-form textarea{font-size:16px}.lead-form button{width:100%}}

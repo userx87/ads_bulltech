@@ -505,13 +505,14 @@
   if (!variant && isPaidChatGPT && variantOverrides[basePath]) {
     const assignmentKey = "bulltech_lp_ab_v1:" + basePath;
     try {
-      const saved = localStorage.getItem(assignmentKey);
+      const mayStore = localStorage.getItem('bulltech_ads_consent_v1') === 'granted';
+      const saved = mayStore ? localStorage.getItem(assignmentKey) : null;
       if (saved === "a" || saved === "b") {
         variant = saved;
         assignmentSource = "paid_persisted";
       } else {
         variant = Math.random() < 0.5 ? "a" : "b";
-        localStorage.setItem(assignmentKey, variant);
+        if (mayStore) localStorage.setItem(assignmentKey, variant);
         assignmentSource = "paid_random";
       }
     } catch (e) {
